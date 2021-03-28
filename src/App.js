@@ -35,13 +35,11 @@ class App extends Component {
   };
 
   getUser = async (username) => {
-    console.log(username);
     this.setState({ loading: true });
     const res = await axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     this.setState({ user: res.data, loading: false });
-    console.log(res.data);
   };
 
   clearUsers = () => this.setState({ users: [], loading: false });
@@ -77,6 +75,8 @@ class App extends Component {
                 )}
               />
               <Route exact path='/about' component={About} />
+              {/* Like Search the User will require state and data to be passed in */
+              /* so you need to use the render= methodology of Route */}
               <Route
                 exact
                 path='/user/:login'
